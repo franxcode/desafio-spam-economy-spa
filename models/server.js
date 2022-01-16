@@ -27,11 +27,20 @@ class Server {
 		this.app.get("/mailing", (req, res) => {
 			const { correos, asunto, contenido } = url.parse(req.url, true).query;
 
+			const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
 			if (correos.length > 0) {
 				if (correos || correos.includes(" ") || correos.includes(",")) {
 					let correosReplace = correos.replace(",", "");
 					let correosArray = correosReplace.split(" ");
-					console.log("CORREOS", correosArray);
+
+					correosArray.forEach((email) => {
+						const cleanEmail = email.trim();
+						const regexResponse = emailRegex.test(cleanEmail);
+						if (regexResponse === false) {
+							res.redirect("/failure.html");
+						}
+					});
 
 					this.emailTemplate().then((apiRes) => {
 						mail.send(correosArray, asunto, contenido + apiRes);
