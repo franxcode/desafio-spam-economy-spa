@@ -1,0 +1,20 @@
+{
+	"name": "desafio_spam_economy_spa",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon index.js"
+	},
+	"keywords": [],
+	"author": "Francisco Oliva",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.24.0",
+		"express": "^4.17.2",
+		"moment": "^2.29.1",
+		"nodemailer": "^6.7.2",
+		"uuid": "^8.3.2"
+	}
+}
